@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block html_attribs %} lang="en"{% endblock %}
+{% block title %}S3 Object List{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+  <!-- ... -->
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+<!-- <img src="{{  url_for('static', filename='vieworder.jpg') }}"/>  -->
+
+<div class="container">
+  <div class="col-12-xs">
+
+    <hr>
+    <table class="table table-striped">
+      <tr>
+        <th>Item Code</th>
+        <th>Item Description</th>
+        <th>Type</th>
+        <th>0-100 km/h (sec)</th>
+        <th>Top Speed (km/h)</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th>Total Price</th>
+      </tr>
+      {% for f in files %}
+      <tr>
+        <div class="product-item">
+        <form method="post" action="/PlaceOrder">
+          <td>{{ f.id }}</td>
+          <td>
+            <div class="product-image"><img src={{ f.url }} width="200" height="132"></div>
+            <input type="hidden" name="item" value="{{ f.url }}"/>
+            <input type="hidden" name="id" value="{{ f.id }}"/>
+          </td>
+          <td>{{ f.car_type }}</td>
+          <td>{{ f.first_100K }}</td>
+          <td>{{ f.top_speed }}</td>
+          <td>{{ f.price }}</td>  
+          <td>{{ f.qty }}</td>
+
+          <td>{{ f.sub_total }}</td>  
+  			</form>
+			  </div>
+      </tr>
+      {% endfor %}
+      <td>Total Order</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>{{ total }}</td>
+    </table>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block html_attribs %} lang="en"{% endblock %}
+{% block title %}S3 Object List{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+  <!-- ... -->
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="col-12-xs">
+    <h3>Existing Inventory</h3>
+    <hr>
+    <table class="table table-striped">
+
+        <tr>
+          <th>Item Image</th>
+          <th>Type</th>
+          <th>0-100 km/hr (sec)</th>
+          <th>Top speed (km/h)</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Add To Cart</th>
+        </tr>
+      
+      {% for f in files %}
+      <tr>
+        <div class="product-item">
+        <form method="post" action="/add">
+          <td>
+            <div class="product-image">
+                <img src={{ f.url }} width="250" height="155"
+            </div> 
+              <!-- width="200" height="132" --> 
+            <input type="hidden" name="item" value="{{ f.url }}"/>
+            <input type="hidden" name="id" value="{{ f.id }}"/>
+          </td>
+          <td>{{ f.car_type }}</td>
+          <td>{{ f.first_100K }} </td>
+          <td>{{ f.top_speed }}</td>
+          <td>{{ f.price }}</td>  
+          <td><input type="text" class="product-quantity" name="quantity" value="{{ f.qty }}" size="2" /></td>
+          <td><input type="submit" value="Update Cart" class="btnAddAction" /></td>
+        
+  			</form>
+			  </div>
+      </tr>
+  
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+{% endblock %}

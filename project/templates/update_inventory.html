@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block html_attribs %} lang="en"{% endblock %}
+{% block title %}S3 Object List{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+  <!-- ... -->
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="col-12-xs">
+
+    <head>
+      <title>HTML div Tag</title>
+    <link rel = "stylesheet" href = "style2.css">
+    </head>
+    <body>
+      <div id = "contentinfo">
+         <p>Enter New Inventory</p>
+      </div>
+    
+    
+    <form class="upload-form" action="{{ url_for('s3.update_inventory') }}" method="POST" enctype="multipart/form-data">
+    
+      <table class="table table-striped">
+    
+        <tr>
+          <th>Item Image</th>
+          <th>Type</th>
+          <th>0-100 km/hr (sec)</th>
+          <th>Top speed (km/h)</th>
+          <th>Price</th>
+          <th>Quantity</th>
+        </tr>
+    
+        <td>
+          <p><input type="file" name="file"></p> 
+        </td>
+    
+        <td>
+          <div class="input-group">
+            <select name="car_type" class="selectpicker form-control">
+              <option value="Fast">Fast</option>
+              <option value="Very Fast">Very Fast</option>
+              <option value="Insanely Fast">Insanely Fast</option>
+            </select>
+          </div>  
+        </td>
+        
+        <td><input type="number" step="0.01" class="form-control" name="first_100K" /></td>
+        <td><input type="number" class="product-quantity" name="top_speed" /></td>
+        <td><input type="number" class="product-quantity" name="price" /></td>
+        <td><input type="number" class="product-quantity" name="qty" value="1" /></td>
+        <td><button type="submit" class="btn btn-primary">Upload</button> </td>
+      </table>
+    
+  </div>
+</div>
+{% endblock %}
